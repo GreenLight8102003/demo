@@ -1,0 +1,268 @@
+:root {
+    /* Soft Pastel Color Palette */
+    --primary: #8b5cf6;      /* Soft Purple */
+    --primary-hover: #7c3aed;
+    --success: #34d399;      /* Mint Green */
+    --success-hover: #10b981;
+    --danger: #f87171;       /* Soft Red */
+    --danger-hover: #ef4444;
+    --background: #faf5ff;   /* Light Lavender */
+    --surface: #ffffff;
+    --text: #4c1d95;         /* Deep Purple */
+    --text-light: #7c3aed;   /* Medium Purple */
+    --border: #e9d5ff;       /* Light Purple */
+    
+    /* Soft Shadows */
+    --shadow-sm: 0 2px 4px rgba(139, 92, 246, 0.05);
+    --shadow: 0 4px 6px rgba(139, 92, 246, 0.1);
+    --shadow-lg: 0 8px 12px rgba(139, 92, 246, 0.15);
+}
+
+body {
+    background: var(--background);
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.5;
+}
+
+/* Modern Container */
+.container {
+    max-width: 1100px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+}
+
+/* Modern Glass Effect */
+.glass-effect {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(233, 213, 255, 0.5);
+    box-shadow: var(--shadow);
+    border-radius: 20px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Modern Buttons */
+.btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    border: none;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.2);
+}
+
+.btn.primary { background: var(--primary); color: white; }
+.btn.success { background: var(--success); color: white; }
+.btn.danger { background: var(--danger); color: white; }
+.btn.secondary { 
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border);
+}
+
+/* Modern Maze Grid */
+.maze-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    min-height: 400px;
+}
+
+#maze {
+    display: grid;
+    gap: 4px;
+    margin: 0 auto;
+    justify-content: center;
+}
+
+.cell {
+    width: 50px;
+    height: 50px;
+    background: var(--surface);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wall { 
+    background: #c4b5fd;  /* Lighter Purple */
+    border-color: #a78bfa;
+}
+
+.path { 
+    background: var(--primary);
+    border-color: var(--primary-hover);
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+}
+
+.start { 
+    background: var(--success);
+    border-color: var(--success-hover);
+    box-shadow: 0 0 20px rgba(52, 211, 153, 0.4);
+}
+
+.end { 
+    background: var(--danger);
+    border-color: var(--danger-hover);
+    box-shadow: 0 0 20px rgba(248, 113, 113, 0.4);
+}
+
+/* Modern Code Display */
+.code-container {
+    overflow: hidden;
+}
+
+.code-header {
+    background: #1a1b26;
+    border-bottom: 1px solid #2f334d;
+    padding: 1rem 1.5rem;
+    border-radius: 20px 20px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.code-header h2 {
+    color: #a9b1d6;
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.code-block {
+    background: #1a1b26;  /* Tokyo Night theme background */
+    color: #a9b1d6;      /* Base text color */
+    padding: 1.5rem;
+    border-radius: 0 0 20px 20px;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    overflow-x: auto;
+}
+
+/* Syntax Highlighting */
+.code-block .comment {
+    color: #565f89;      /* Light gray for comments */
+    font-style: italic;
+}
+
+.code-block .keyword {
+    color: #bb9af7;      /* Purple for keywords */
+    font-weight: 500;
+}
+
+.code-block .function {
+    color: #7aa2f7;      /* Blue for functions */
+}
+
+.code-block .variable {
+    color: #9ece6a;      /* Green for variables */
+}
+
+.code-block .parameter {
+    color: #e0af68;      /* Orange for parameters */
+}
+
+.code-block .operator {
+    color: #89ddff;      /* Light blue for operators */
+}
+
+.code-block .number {
+    color: #ff9e64;      /* Orange for numbers */
+}
+
+.code-block .string {
+    color: #9ece6a;      /* Green for strings */
+}
+
+/* Modern Steps Display */
+.steps-container {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.step {
+    padding: 0.75rem 1.25rem;
+    margin: 0.75rem 0;
+    background: rgba(255, 255, 255, 0.9);
+    border-left: 4px solid var(--primary);
+    border-radius: 0 12px 12px 0;
+    color: var(--text);
+    font-size: 0.95rem;
+}
+
+.step:hover {
+    transform: translateX(4px);
+    background: white;
+    box-shadow: var(--shadow);
+}
+
+/* Modern Input */
+input[type="number"] {
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    color: var(--text);
+    background: rgba(255, 255, 255, 0.9);
+}
+
+input[type="number"]:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
+}
+
+/* Additional Styles */
+h1, h2 {
+    color: var(--text);
+    letter-spacing: 0.5px;
+}
+
+.subtitle {
+    color: var(--text-light);
+    font-weight: normal;
+}
+
+/* Animations */
+@keyframes softPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+}
+
+.path, .start, .end {
+    animation: softPulse 2s infinite;
+}
+
+/* Window Controls */
+.window-controls {
+    display: flex;
+    gap: 8px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.dot.red { background: #ff5f56; }
+.dot.yellow { background: #ffbd2e; }
+.dot.green { background: #27c93f; }
+
+/* Controls Container */
+.controls {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin: 1.5rem 0;
+}

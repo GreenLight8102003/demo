@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Maze Solver - Recursive Pathfinding</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fira-code@6.2.0/distr/fira_code.css">
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Giải Mê Cung <span class="subtitle">Tìm Đường Đệ Quy</span></h1>
+        
+        <div class="setup-container glass-effect">
+            <div class="size-input">
+                <label>Kích thước mê cung:</label>
+                <input type="number" id="mazeSize" min="2" max="10" value="5">
+                <button id="createMaze" class="btn primary">Tạo mê cung</button>
+            </div>
+        </div>
+
+        <div class="maze-container glass-effect">
+            <div id="maze"></div>
+        </div>
+
+        <div class="controls">
+            <button id="setStart" class="btn success">Điểm bắt đầu</button>
+            <button id="setEnd" class="btn danger">Điểm kết thúc</button>
+            <button id="solveMaze" class="btn primary">Tìm đường</button>
+            <button id="resetMaze" class="btn secondary">Đặt lại</button>
+        </div>
+
+        <div class="code-container glass-effect">
+            <div class="code-header">
+                <h2>🔍 Thuật toán đệ quy tìm đường</h2>
+                <div class="window-controls">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                </div>
+            </div>
+            <pre class="code-block"><code>
+<span class="comment">// Hàm đệ quy tìm đường trong mê cung</span>
+<span class="function">findPath</span>(<span class="parameter">x</span>, <span class="parameter">y</span>) {
+    <span class="comment">// BƯỚC 1: ĐIỀU KIỆN DỪNG</span>
+    <span class="keyword">if</span> (<span class="variable">x</span> <span class="operator"><</span> <span class="number">0</span> <span class="operator">||</span> <span class="variable">x</span> <span class="operator">>=</span> <span class="keyword">this</span>.<span class="variable">size</span> <span class="operator">||</span> 
+        <span class="variable">y</span> <span class="operator"><</span> <span class="number">0</span> <span class="operator">||</span> <span class="variable">y</span> <span class="operator">>=</span> <span class="keyword">this</span>.<span class="variable">size</span> <span class="operator">||</span>
+        <span class="keyword">this</span>.<span class="variable">maze</span>[<span class="variable">x</span>][<span class="variable">y</span>] <span class="operator">===</span> <span class="number">1</span> <span class="operator">||</span> 
+        <span class="keyword">this</span>.<span class="variable">visited</span>[<span class="variable">x</span>][<span class="variable">y</span>]) {
+        <span class="keyword">return</span> <span class="keyword">false</span>;  <span class="comment">// Không đi được</span>
+    }
+
+    <span class="comment">// BƯỚC 2: ĐÁNH DẤU VÀ GHI NHẬN</span>
+    <span class="keyword">this</span>.<span class="variable">visited</span>[<span class="variable">x</span>][<span class="variable">y</span>] <span class="operator">=</span> <span class="keyword">true</span>;     <span class="comment">// Đánh dấu đã đi</span>
+    <span class="keyword">this</span>.<span class="variable">path</span>.<span class="function">push</span>([<span class="variable">x</span>, <span class="variable">y</span>]);        <span class="comment">// Thêm vào đường đi</span>
+
+    <span class="comment">// BƯỚC 3: KIỂM TRA ĐÍCH</span>
+    <span class="keyword">if</span> (<span class="variable">x</span> <span class="operator">===</span> <span class="keyword">this</span>.<span class="variable">end</span>[<span class="number">0</span>] <span class="operator">&&</span> 
+        <span class="variable">y</span> <span class="operator">===</span> <span class="keyword">this</span>.<span class="variable">end</span>[<span class="number">1</span>]) {
+        <span class="keyword">return</span> <span class="keyword">true</span>;  <span class="comment">// Tìm thấy đích</span>
+    }
+
+    <span class="comment">// BƯỚC 4: GỌI ĐỆ QUY - THỬ CÁC HƯỚNG</span>
+    <span class="keyword">const</span> <span class="variable">directions</span> <span class="operator">=</span> [
+        [<span class="number">0</span>, <span class="number">1</span>],   <span class="comment">// phải</span>
+        [<span class="number">1</span>, <span class="number">0</span>],   <span class="comment">// xuống</span>
+        [<span class="number">0</span>, <span class="operator">-</span><span class="number">1</span>],  <span class="comment">// trái</span>
+        [<span class="operator">-</span><span class="number">1</span>, <span class="number">0</span>]   <span class="comment">// lên</span>
+    ];
+
+    <span class="keyword">for</span> (<span class="keyword">let</span> [<span class="variable">dx</span>, <span class="variable">dy</span>] <span class="keyword">of</span> <span class="variable">directions</span>) {
+        <span class="keyword">if</span> (<span class="keyword">this</span>.<span class="function">findPath</span>(<span class="variable">x</span> <span class="operator">+</span> <span class="variable">dx</span>, <span class="variable">y</span> <span class="operator">+</span> <span class="variable">dy</span>)) {
+            <span class="keyword">return</span> <span class="keyword">true</span>;  <span class="comment">// Tìm được đường</span>
+        }
+    }
+
+    <span class="comment">// BƯỚC 5: QUAY LUI (BACKTRACK)</span>
+    <span class="keyword">this</span>.<span class="variable">path</span>.<span class="function">pop</span>();     <span class="comment">// Xóa đường đi hiện tại</span>
+    <span class="keyword">return</span> <span class="keyword">false</span>;        <span class="comment">// Thử hướng khác</span>
+}</code></pre>
+        </div>
+
+        <div class="steps-container glass-effect">
+            <h2>🔄 Các bước thực hiện</h2>
+            <div id="steps"></div>
+        </div>
+    </div>
+</body>
+<script src="main.js"></script>
+</html>
